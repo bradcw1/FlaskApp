@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap&effect=emboss');
+
+body, html {
+  height: 100%;
+  font-family: 'Montserrat', serif;
+}
+
+.bg {
+  /* The image used */
+  background-image: ("static/background2.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+
+#content{
+  margin: 20px;
+}
+
+#navimage{
+	margin-right: 20px;
+}
