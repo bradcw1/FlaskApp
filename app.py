@@ -28,6 +28,19 @@ def country():
 
     return "Country added"
 
+@app.route('/getCountries', methods=['GET'])
+@app.route('/getCountries<country_id>', methods=['GET'])
+def getCountries(country_id=None):
+
+    country = None
+
+    if country_id is None:
+        country = Country.objects
+    else:
+        country = Country.objects.get(id=country_id)
+
+    return country.to_json()
+
 @app.route('/loadData')
 def loadData():
     return "Success"
