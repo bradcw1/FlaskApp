@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template
 from mongoengine import *
-import os
-import csv
+import os, csv, bson
 
 app = Flask(__name__)
 
@@ -18,10 +17,12 @@ class Country(Document):
 def index():
     thisTitle = "Index"
 
-    path = os.path.join(app.config ['FILES_FOLDER'], "data1.csv")
-    f = open(path)
-    r = csv.reader(f)
-    d = list(r)
+    for file in os.listdir(app.config['FILES_FOLDER']):
+        filename = os.fsdecode(file)
+        path = os.path.join(app.config['FILES_FOLDER'],filename)
+        f = open(path)
+        r = csv.reader(f)
+        d = list(r)
 
     for data in d:
         print(data)
@@ -36,23 +37,37 @@ def inspiration():
 @app.route('/country')
 def country():
 
-    newCountry = Country(name='New Zealand')
+    newCountry = Country(name='Afghanistan')
     newCountry.save()
 
     return "Country added"
 
 @app.route('/countries', methods=['GET'])
-@app.route('/countries/<country_id>', methods=['GET'])
-def getCountries(country_id=None):
+@app.route('/countries/<country_name>', methods=['GET'])
+def getCountries(country_name=None):
 
     country = None
 
-    if country_id is None:
+    if country_name is None:
         country = Country.objects
-    else:
-        country = Country.objects.get(id=country_id)
 
-    return country.to_json()
+        return country.to_json(), 200
+    else:
+        if Country.objects.get(name=country_name):
+            country = Country.objects.get(name=country_name)
+            return country.to_json(), 200
+        else:
+            return country_name + " does not exist", 404
+
+@app.route('/placeholderPOST', methods=['POST'])
+def placeholderPOST():
+
+    return "something"
+
+@app.route('/placeholderDELETE', methods=['DELETE'])
+def placeholderDELETE():
+
+    return "something"
 
 @app.route('/loadData')
 def loadData():
