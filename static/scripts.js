@@ -19,31 +19,31 @@ $(function(){
 	});
 });
 
-// $.get("/countries", function(){
-// 		console.log("countries success");
-// }).fail(function(){
-// 		console.log("countries failure");
-// });
-//
-// $.get("/countries/123", function(){
-// 		console.log("countries success");
-// }).fail(function(){
-// 		console.log("countries failure");
-// });
-//
-// $.post("/placeholderPOST", function(){
-// 		console.log("post success");
-// }).fail(function(){
-// 		console.log("post failure");
-// });
-//
-// $.ajax({
-//     url: '/placeholderDELETE',
-//     type: 'DELETE',
-//     success: function() {
-//         console.log("delete success")
-// 			},
-// 		fail: function() {
-// 				console.log("delete failure")
-// 		}
-// 	});
+$.get("/countries", function(){
+		console.log("countries success");
+}).fail(function(){
+		console.log("countries failure");
+});
+
+$.get("/countries/123", function(){
+		console.log("countries success");
+}).fail(function(){
+		console.log("countries failure");
+});
+
+$.post("/placeholderPOST", function(){
+		console.log("post success");
+}).fail(function(){
+		console.log("post failure");
+});
+
+$.ajax({
+    url: '/placeholderDELETE',
+    type: 'DELETE',
+    success: function() {
+        console.log("delete success")
+			},
+		fail: function() {
+				console.log("delete failure")
+		}
+	});
