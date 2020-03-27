@@ -38,7 +38,7 @@ $.get("/countries", function(){
 		console.log("countries failure");
 });
 
-$.get("/countries/123", function(){
+$.get("/countries/Afghanistan", function(){
 		console.log("countries success");
 }).fail(function(){
 		console.log("countries failure");
