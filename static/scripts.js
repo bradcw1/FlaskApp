@@ -7,7 +7,7 @@ $(function(){
 		$el.text(Math.random());
 
 	});
-
+	//Clicking the background will change the colour of the navbar title
 	$(".bg").on("click", function(){
 
 		var red = Math.floor(Math.random() * 255);
@@ -17,8 +17,20 @@ $(function(){
 	$(".navbar-brand").css("color", "rgb("+red+","+green+","+blue+")");
 
 	});
+
+	//clicking the button named "Get Countries" will call an AJAX function. This function
+	//will return the data from the API route "/countries". The resulting data will be printed to
+	//the console.
+
+	$("button#countries").on("click", function(){
+		$.get("/countries", function(data){
+			console.log(data);
+		});
+
+	});
 });
 
+//just a bunch of heckin AJAX calls
 $.get("/countries", function(){
 		console.log("countries success");
 }).fail(function(){
