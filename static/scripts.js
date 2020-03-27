@@ -24,7 +24,8 @@ $(function(){
 
 	$("button#countries").on("click", function(){
 		$.get("/countries", function(data){
-			console.log(data);
+			var parsedData = JSON.parse(data);
+			console.log(parsedData);
 		});
 
 	});
