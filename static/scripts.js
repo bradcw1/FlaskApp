@@ -17,46 +17,34 @@ $(function(){
 	$(".navbar-brand").css("color", "rgb("+red+","+green+","+blue+")");
 
 	});
-
-	//clicking the button named "Get Countries" will call an AJAX function. This function
-	//will return the data from the API route "/countries". The resulting data will be printed to
-	//the console.
-
-	$("button#countries").on("click", function(){
-		$.get("/countries", function(data){
-			var parsedData = JSON.parse(data);
-			console.log(parsedData);
-		});
-
-	});
 });
 
 //just a bunch of heckin AJAX calls
-$.get("/countries", function(){
-		console.log("countries success");
-}).fail(function(){
-		console.log("countries failure");
-});
+// $.get("/countries", function(){
+// 		console.log("countries success");
+// }).fail(function(){
+// 		console.log("countries failure");
+// });
 
-$.get("/countries/Afghanistan", function(){
-		console.log("countries success");
-}).fail(function(){
-		console.log("countries failure");
-});
+// $.get("/countries/test", function(){
+// 		console.log("countries success");
+// }).fail(function(response){
+// 		console.log(response);
+// });
 
-$.post("/placeholderPOST", function(){
-		console.log("post success");
-}).fail(function(){
-		console.log("post failure");
-});
+// $.post("/placeholderPOST", function(){
+// 		console.log("post success");
+// }).fail(function(){
+// 		console.log("post failure");
+// });
 
-$.ajax({
-    url: '/placeholderDELETE',
-    type: 'DELETE',
-    success: function() {
-        console.log("delete success")
-			},
-		fail: function() {
-				console.log("delete failure")
-		}
-	});
+// $.ajax({
+//     url: '/placeholderDELETE',
+//     type: 'DELETE',
+//     success: function() {
+//         console.log("delete success")
+// 			},
+// 		fail: function() {
+// 				console.log("delete failure")
+// 		}
+// 	});

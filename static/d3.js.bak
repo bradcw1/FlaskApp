@@ -1,0 +1,32 @@
+//clicking the button named "Get Countries" will call an AJAX function. This function
+//will return the data from the API route "/countries". The resulting data will be printed to
+//the console.
+
+$.get("/countries", function(data){
+    var parsedData = JSON.parse(data);
+
+    var margin = {top: 10, right: 20, bottom: 30, left: 50},
+        width = 500 - margin.left - margin.right,
+        height = 420 - margin.top - margin.bottom;
+
+    //var g = d3.select("svg").selectAll("g").data(parsedData);
+    var svg = d3.select("#dataviz")
+        .append("g")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+    
+    // create new 'g' elements for each country
+    var en = g.enter().append("g")
+        .attr("transform",function(d){
+        return "translate("+ (Math.random() * 100) + 40 + "," + (Math.random() * 100) + 40 +")"
+    });
+    
+    // add a circle to each 'g'
+    var circle = en.append("circle")
+        .attr("r",function(d){ return Math.random() * 20 })
+        .attr("fill",function(d,i){ return i % 2 == 0 ? "green" : "blue" });
+    
+    // add a text to each 'g'
+    en.append("text").text(function(d){ return d.name });
+
+});
