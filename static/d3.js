@@ -12,16 +12,16 @@ function x_minMax (data) {
     // var values = [("x_min", min), ("x_max", max)]
 
     return {"x_min":min,"x_max":max};
-}
+};
 //clicking the button named "Get Countries" will call an AJAX function. This function
 //will return the data from the API route "/countries". The resulting data will be printed to
 //the console.
 $.get("/countries", function(data){
     var parsedData = JSON.parse(data);
 
-    var year = '1800'
+    var year = '1801'
 
-    // console.log(parsedData);
+    console.log(parsedData);
 
     // console.log(x_minMax(parsedData).x_min);
 
