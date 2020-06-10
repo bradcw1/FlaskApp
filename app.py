@@ -31,14 +31,6 @@ def inspiration():
     thisTitle = "Inspiration"
     return render_template('inspiration.html',title=thisTitle)
 
-@app.route('/country')
-def country():
-
-    newCountry = Country(name='Zimbabwe')
-    newCountry.save()
-
-    return "Country added"
-
 @app.route('/countries', methods=['GET'])
 @app.route('/countries/<country_name>', methods=['GET'])
 def getCountries(country_name=None):
@@ -63,10 +55,15 @@ def placeholderPOST():
     return "something"
 
 @app.route('/countries/<country_name>', methods=['DELETE'])
-def deleteCountry(country_name=None):
+def deleteCountry(country_name):
 
-    return "something"
-    
+    try:
+        country = Country.objects.get(name=country_name)
+        country.delete()
+        return country_name + " deleted!"
+    except DoesNotExist:
+        error = {"error": {"code":404, "message": "country not found"}}
+        return error, 404
 
 @app.route("/loadData")
 def loadData():
