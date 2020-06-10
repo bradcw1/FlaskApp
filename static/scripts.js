@@ -1,12 +1,5 @@
 $(function(){
 
-	//On button click change the content inside the paragraph tags
-	$("button#test").on("click", function(){
-
-		var $el = $("div#content > p");
-		$el.text(Math.random());
-
-	});
 	//Clicking the background will change the colour of the navbar title
 	$(".bg").on("click", function(){
 
@@ -16,6 +9,20 @@ $(function(){
 
 	$(".navbar-brand").css("color", "rgb("+red+","+green+","+blue+")");
 
+	});
+
+	//Testing the delete route with a button
+	$("button#delete").on("click", function(){
+		$.ajax({
+			url: '/countries/Afghanistan',
+			type: 'DELETE',
+			success: function() {
+				console.log("delete success")
+					},
+				fail: function() {
+						console.log("delete failure")
+				}
+			});
 	});
 });
 
@@ -37,14 +44,3 @@ $(function(){
 // }).fail(function(){
 // 		console.log("post failure");
 // });
-
-// $.ajax({
-//     url: '/placeholderDELETE',
-//     type: 'DELETE',
-//     success: function() {
-//         console.log("delete success")
-// 			},
-// 		fail: function() {
-// 				console.log("delete failure")
-// 		}
-// 	});
