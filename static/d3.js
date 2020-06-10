@@ -19,8 +19,6 @@ function x_minMax (data) {
 $.get("/countries", function(data){
     var parsedData = JSON.parse(data);
 
-    var year = '1801'
-
     console.log(parsedData);
 
     // console.log(x_minMax(parsedData).x_min);
@@ -76,7 +74,12 @@ $.get("/countries", function(data){
         .attr("transform",function(d){
             if(d.data.cpw && d.data.ipp)
             {
-                return "translate(" + x(d.data.cpw[year]) + "," + y(d.data.ipp[year]) + ")" 
+		var year = 1801;
+		
+		if (d.data.cpw[year] != undefined){var cpw = d.data.cpw[year]}
+		if (d.data.ipp[year] != undefined){var ipp = d.data.ipp[year]}
+		
+		if (cpw&&ipp){return "translate(" + x(cpw) + "," + y(ipp) + ")"} 
             }
             
     });
@@ -86,12 +89,14 @@ $.get("/countries", function(data){
         .attr("r",function(d){
             if(d && d.data.ley)
             {
+		var year = 1801;
                 return z(d.data.ley[year])
             }
         })
         .attr("fill",function(d,i){ return i % 2 == 0 ? "red" : "blue" });
 
     // add a text to each 'g'
-    en.append("text").text(function(d){ return d.name + ":" + d.data.cpw[year] + ":" + d.data.ipp[year] });
+    
+    en.append("text").text(function(d){ return d.name });
 
 });

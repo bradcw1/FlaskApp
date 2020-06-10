@@ -62,10 +62,11 @@ def placeholderPOST():
 
     return "something"
 
-@app.route('/placeholderDELETE', methods=['DELETE'])
-def placeholderDELETE():
+@app.route('/countries/<country_name>', methods=['DELETE'])
+def deleteCountry(country_name=None):
 
     return "something"
+    
 
 @app.route("/loadData")
 def loadData():
