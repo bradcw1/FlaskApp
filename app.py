@@ -49,10 +49,20 @@ def getCountries(country_name=None):
             error = {"error": {"code":404, "message": "country not found"}}
             return error, 404
 
-@app.route('/placeholderPOST', methods=['POST'])
-def placeholderPOST():
+@app.route('/countries/<country_name>/<data_type>/<new_value>', methods=['POST'])
+def updateCountry(country_name, data_type, new_value):
 
-    return "something"
+    try:
+        country = Country.objects.get(name=country_name)
+        country.data['cpw']["1800"] = "42069"
+        country.save()        
+        # test = country('data')
+        # country.save()   
+        return country.to_json(), 200
+    except DoesNotExist:
+        error = {"error": {"code":404, "message": "country not found"}}
+        return error, 404
+                
 
 @app.route('/countries/<country_name>', methods=['DELETE'])
 def deleteCountry(country_name):

@@ -24,6 +24,20 @@ $(function(){
 				}
 			});
 	});
+
+	//Testing the post route with a button
+	$("button#update").on("click", function(){
+		$.ajax({
+			url: '/countries/Afghanistan',
+			type: 'POST',
+			success: function() {
+				console.log("delete success")
+					},
+				fail: function() {
+						console.log("delete failure")
+				}
+		});
+	});
 });
 
 //just a bunch of heckin AJAX calls
