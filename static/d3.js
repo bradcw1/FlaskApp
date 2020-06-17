@@ -1,34 +1,15 @@
-//LEGEND
-// cpw.csv = children_per_woman_total_fertility
-//ipp.csv = income_per_person_gdppercapita_ppp_inflation_adjusted
-//ley.csv = life_expectency_years
+var countries;
+var x;
+var y;
+var z;
+var duration = 1000;
+var yearSlider = document.getElementById("yearSlider");
 
-function x_minMax (data) {
-    
-    var keys = Object.keys(data[0]['data']['data1']);
-    min = d3.min(keys);
-    max = d3.max(keys);
-
-    // var values = [("x_min", min), ("x_max", max)]
-
-    return {"x_min":min,"x_max":max};
-};
-//clicking the button named "Get Countries" will call an AJAX function. This function
-//will return the data from the API route "/countries". The resulting data will be printed to
-//the console.
-$.get("/countries", function(data){
-    var parsedData = JSON.parse(data);
-
-    console.log(parsedData);
-
-    // console.log(x_minMax(parsedData).x_min);
+function createGraph(){
 
     var margin = {top: 10, right: 20, bottom: 30, left: 50},
-    width = 500 - margin.left - margin.right,
-    height = 420 - margin.top - margin.bottom;
-
-    // a common thing is to 'wrap' some elements in a 'g' container (group)
-    // this is like wrapping html elements in a container div
+    width = 900 - margin.left - margin.right,
+    height = 550 - margin.top - margin.bottom;
 
     var svg = d3.select("#dataviz")
     .append("svg")
@@ -40,63 +21,148 @@ $.get("/countries", function(data){
           "translate(" + margin.left + "," + margin.top + ")");
 
     // Add X axis
-    var x = d3.scaleLinear()
-    .domain([0, 10])
-    .range([ 0, width]);
+    x = d3.scaleLinear()
+        .domain([0, 9])
+        .range([ 0, width]);    
 
     svg.append("g")    
-    .attr("transform", "translate(0," + height + ")")
-    .attr("class", "x-axis")
-    .call(d3.axisBottom(x));
+        .attr("transform", "translate(0," + height + ")")
+        .attr("class", "x-axis")
+        .call(d3.axisBottom(x));
+
+    svg.append("text")
+        .attr("class", "x label")
+        .attr("text-anchor", "end")
+        .attr("x", width)
+        .attr("y", height - 6)
+        .text("Children Per Woman")
 
     // Add Y axis
-    var y = d3.scaleLinear()
-    .domain([0, 500])
-    .range([ height, 0]);
+    y = d3.scaleLinear()
+        .domain([0, 200000])
+        .range([ height, 0]);
 
     svg.append("g")
-    .attr("class", "y-axis")
-    .call(d3.axisLeft(y));
+        .attr("class", "y-axis")
+        .call(d3.axisLeft(y));
+
+    svg.append("text")
+        .attr("class", "y label")
+        .attr("text-anchor", "end")
+        .attr("y", 10)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text("Income Per Person GDP Per Capita")
 
     // Add a scale for bubble size
-    var z = d3.scaleLinear()
+    z = d3.scaleLinear()
     .domain([1, 100])
-    .range([ 1, 100]);
+    .range([ 1, 20]);
+};
+
+function moveCircles() {
+    newYear = yearSlider.value;
+
+    d3.select("svg").selectAll(".datapoint")
+        .transition()
+        .duration(duration)
+        .attr("transform",function(d){
+            if(d.data.cpw && d.data.ipp){
+                
+                if (d.data.cpw[newYear] != undefined){var cpw = d.data.cpw[newYear]}
+                if (d.data.ipp[newYear] != undefined){var ipp = d.data.ipp[newYear]}
+                
+                if (cpw&&ipp){return "translate(" + x(cpw) + "," + y(ipp) + ")"} 
+            }
+        })
+
+    d3.select("svg").selectAll("circle")
+        .transition()
+        .duration(duration)
+        .attr("r", function(d) {
+            if(d && d.data.ley){
+                return z(d.data.ley[newYear])
+            }
+        })        
+}
+
+$.get("/countries", function (data){
+    countries = JSON.parse(data);
+    createGraph();
+
+    // Tooltip div that is hidden by default
+    var tooltip = d3.select("#dataviz")
+    .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "black")
+      .style("border-radius", "5px")
+      .style("padding", "10px")
+      .style("color", "white")
+
+    // Show Tool Tip
+    var showTooltip = function(d) {
+        tooltip
+          .transition()
+          .duration(200)
+        tooltip
+          .style("opacity", 1)
+          .html(
+              "<p>Country: " + d.name + "</p><p>Life Expectancy: " + d.data.ley[document.getElementById("yearSlider").value] + "</p>"
+          )
+          .style("left", (d3.event.pageX + 15) + "px")
+          .style("top", (d3.event.pageY + 15) + "px")
+    }
+
+    // Move Tool Tip
+    var moveTooltip = function(d) {
+    tooltip
+        .style("left", (d3.event.pageX + 15) + "px")
+        .style("top", (d3.event.pageY + 15) + "px")
+    }
+    // Hide Tool Tip
+    var hideTooltip = function(d) {
+    tooltip
+        .transition()
+        .duration(100)
+        .style("opacity", 0)
+    }
 
     var g = d3.select("svg")
     .selectAll("g")
-    .data(parsedData);
+    .data(countries);
 
-    // create new 'g' elements for each country
-
-    var en = g.enter()
+    var enter = g.enter()
         .append("g")
+        .attr("id", function(d) {return d.name})
+        .attr("class", "datapoint" )
         .attr("transform",function(d){
-            if(d.data.cpw && d.data.ipp)
-            {
-		var year = 1801;
-		
-		if (d.data.cpw[year] != undefined){var cpw = d.data.cpw[year]}
-		if (d.data.ipp[year] != undefined){var ipp = d.data.ipp[year]}
-		
-		if (cpw&&ipp){return "translate(" + x(cpw) + "," + y(ipp) + ")"} 
+            if(d.data.cpw && d.data.ipp){
+                
+                if (d.data.cpw[1800] != undefined){var cpw = d.data.cpw[1800]}
+                if (d.data.ipp[1800] != undefined){var ipp = d.data.ipp[1800]}
+                
+                if (cpw&&ipp){return "translate(" + x(cpw) + "," + y(ipp) + ")"} 
             }
-            
-    });
-
-    // add a circle to each 'g'
-    var circle = en.append("circle")
-        .attr("r",function(d){
-            if(d && d.data.ley)
-            {
-		var year = 1801;
-                return z(d.data.ley[year])
-            }
-        })
-        .attr("fill",function(d,i){ return i % 2 == 0 ? "red" : "blue" });
-
-    // add a text to each 'g'
+        });
     
-    en.append("text").text(function(d){ return d.name });
-
+    var circle = enter.append("circle")
+        .attr("class", "circle")
+        .attr("r", "20")
+        .attr("r", function(d) {
+            if(d && d.data.ley){
+                return z(d.data.ley[1800])
+            }            
+        })
+        .on("mouseover", showTooltip )
+        .on("mousemove", moveTooltip )
+        .on("mouseleave", hideTooltip );
+    
+    yearSlider.oninput = function() {
+        moveCircles();
+    };
 });
+
+
+
+

@@ -1,29 +1,40 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap&effect=emboss');
-
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap&effect=emboss");
 body, html {
   height: 100%;
-  font-family: 'Montserrat', serif;
+  font-family: "Montserrat", sans-serif;
 }
 
-.bg {
-  /* The image used */
-  background-image: ("static/background2.jpg");
-
-  /* Full height */
-  height: 100%;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+svg {
+  background-color: #cddffc;
 }
 
-
-
-#content{
+#content {
   margin: 20px;
 }
 
-#navimage{
-	margin-right: 20px;
+#navimage {
+  margin-right: 20px;
 }
+
+#yearSlider {
+  width: 500px;
+}
+
+div.tooltip {
+  background-color: #ae9ef8 !important;
+}
+
+.circle {
+  stroke-width: 2px;
+  fill: #ae9ef8;
+  fill-opacity: 0.75;
+  stroke: white;
+}
+
+.circle:hover {
+  stroke: black;
+  fill: #ae9ef8;
+  fill-opacity: 1;
+}
+
+/*# sourceMappingURL=style.css.map */

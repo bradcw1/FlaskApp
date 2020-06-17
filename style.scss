@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap&effect=emboss');
+
+$font: 'Montserrat', sans-serif;
+$primary-color: rgb(174, 158, 248);
+$secondary-color: rgb(205, 223, 252);
+$font-color: white;
+
+body, html {
+  height: 100%;
+  font-family: $font;
+}
+
+svg {
+  background-color: $secondary-color;
+}
+
+#content{
+  margin: 20px;
+}
+
+#navimage{
+	margin-right: 20px;
+}
+
+#yearSlider{
+  width: 500px;
+}
+
+div.tooltip{
+  background-color: $primary-color !important;
+}
+
+.circle {
+  stroke-width: 2px;          
+  fill: $primary-color;
+  fill-opacity: .75; 
+  stroke: white;
+}
+
+.circle:hover {
+  stroke: black;
+  fill: $primary-color;
+  fill-opacity: 1.0;
+}
