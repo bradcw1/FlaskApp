@@ -3,9 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
-    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
-    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">    
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title>Inspiration</title>
   </head>
@@ -15,7 +13,7 @@
 
   	<div class="row">
 
-	  	<div class="card bg-info mb-3, col-4" style="width: 18rem;">
+	  	<div class="card bg-info mb-3, col-4" id="card1">
 		  <img src="{{ url_for('static', filename='citak.png')}}" class="card-img-top" alt="...">
 		  <div class="card-body">
 		    <h5 class="card-title">Citak Rugs</h5>
@@ -23,8 +21,10 @@
 		    <a href="https://www.citakrugs.ca/collections/" class="btn btn-primary" target="_blank">Website</a>
 		  </div>
 		</div>
+	</div>
 
-		<div class="card bg-info mb-3, col-4" style="width: 18rem;">
+	<div class="row">
+		<div class="card bg-info mb-3, col-4" id="card2">
 		  <img src="{{ url_for('static', filename='tripwire.png')}}" class="card-img-top" alt="...">
 		  <div class="card-body">
 		    <h5 class="card-title">Tripwire Magazine</h5>
@@ -32,17 +32,21 @@
 		    <a href="https://www.tripwiremagazine.com/websites-with-floating-and-fixed-position-navigation-designs/" class="btn btn-primary" target="_blank">Website</a>
 		  </div>
 		</div>
+	</div>
 
-		<div class="card bg-info mb-3, col-4" style="width: 18rem;">
+	<div class="row">
+		<div class="card bg-info mb-3, col-4" id="card3">
 		  <img src="{{ url_for('static', filename='nitrografix.png')}}" class="card-img-top" alt="...">
 		  <div class="card-body">
 		    <h5 class="card-title">Nitrografix</h5>
 		    <p class="card-text">This website uses a font called Monsterrat (https://fonts.google.com/specimen/Montserrat). After looking at fonts that various professional websites use I was surprised just how much they influence the feel of the website. It's difficult to explain just how they make me feel, but a bank would use a more vintage feeling font to make you feel like the bank is old, or long standing. As for the font I have chosen to focus on, Monsterrat, I like that it is a plain in just the right way. It is clear and easily readable for conveying information. It is versatile, whether it's used as a header or for readable text in a paragraph.</p>
 		    <a href="https://www.nitrografix.net/" class="btn btn-primary" target="_blank">Website</a>
 		  </div>
-		</div>
+		</div>	
 	</div>
 
+	<script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
 
   </body>
 </html>

@@ -1,7 +1,23 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap&effect=emboss");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Source+Sans+Pro:wght@300;400&display=swap");
 body, html {
   height: 100%;
+}
+
+a.btn.btn-primary {
+  background-color: #ae9ef8;
+  border: black;
+}
+
+.navbar-brand {
+  color: #ae9ef8 !important;
   font-family: "Montserrat", sans-serif;
+}
+
+div.card, div.bg-info, div.card-body {
+  background-color: #cddffc !important;
+  font-family: "Source Sans Pro", sans-serif;
+  padding: 10px;
+  margin: 10px;
 }
 
 svg {

@@ -1,14 +1,39 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap&effect=emboss');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Source+Sans+Pro:wght@300;400&display=swap');
 
-$font: 'Montserrat', sans-serif;
+$font1: 'Montserrat', sans-serif;
+$font2: 'Source Sans Pro', sans-serif;
 $primary-color: rgb(174, 158, 248);
 $secondary-color: rgb(205, 223, 252);
-$font-color: white;
+$font-color: #7A6AC0;
+
 
 body, html {
   height: 100%;
-  font-family: $font;
 }
+
+a.btn.btn-primary{
+  background-color: $primary-color;
+  border: black;
+
+}
+
+.navbar-brand{
+  color: $primary-color !important;
+  font-family: $font1;
+}
+
+div.card,div.bg-info,div.card-body {
+  background-color: $secondary-color !important;
+  font-family: $font2;
+  padding: 10px;
+  margin: 10px;
+}
+
+// .card-img-top {
+//   width: 50%;
+//   height: 50%;
+// }
+
 
 svg {
   background-color: $secondary-color;

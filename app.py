@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, flash
 from mongoengine import *
 from flask_cors import CORS
 import os, csv
@@ -22,8 +22,7 @@ class Error(Document):
 @app.route('/index')
 @app.route('/home')
 def index():
-    thisTitle = "Index"
-
+    thisTitle = "Home"
     return render_template('index.html',title=thisTitle)
 
 @app.route('/inspiration')
@@ -68,7 +67,7 @@ def deleteCountry(country_name):
     try:
         country = Country.objects.get(name=country_name)
         country.delete()
-        return country_name + " deleted!"
+        return country_name + " deleted!", 200
     except DoesNotExist:
         error = {"error": {"code":404, "message": "country not found"}}
         return error, 404
@@ -109,8 +108,8 @@ def loadData():
                 country["data"] = dict
 
             country.save()
-
-    return "Done"
+    
+    return ("Data Loaded"), 200
 
 @app.errorhandler(404)
 def not_found_error(error):
