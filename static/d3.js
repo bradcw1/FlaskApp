@@ -7,11 +7,13 @@ var yearSlider = document.getElementById("yearSlider");
 
 function createGraph(){
 
+    // Create margin variables for the size of the svg
     var margin = {top: 10, right: 20, bottom: 30, left: 50},
     width = 900 - margin.left - margin.right,
     height = 550 - margin.top - margin.bottom;
 
-    var svg = d3.select("#dataviz")
+    // Create the base svg to build on top of
+    var svg = d3.select("#data")
     .append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
@@ -30,6 +32,7 @@ function createGraph(){
         .attr("class", "x-axis")
         .call(d3.axisBottom(x));
 
+    // X axis text
     svg.append("text")
         .attr("class", "x label")
         .attr("text-anchor", "end")
@@ -46,6 +49,7 @@ function createGraph(){
         .attr("class", "y-axis")
         .call(d3.axisLeft(y));
 
+    // Y axis text
     svg.append("text")
         .attr("class", "y label")
         .attr("text-anchor", "end")
@@ -60,6 +64,7 @@ function createGraph(){
     .range([ 1, 20]);
 };
 
+// When the slider is moved to change the year, move the circles
 function moveCircles() {
     newYear = yearSlider.value;
 
@@ -91,7 +96,7 @@ $.get("/countries", function (data){
     createGraph();
 
     // Tooltip div that is hidden by default
-    var tooltip = d3.select("#dataviz")
+    var tooltip = d3.select("#data")
     .append("div")
       .style("opacity", 0)
       .attr("class", "tooltip")
@@ -128,10 +133,12 @@ $.get("/countries", function (data){
         .style("opacity", 0)
     }
 
+    // Select the base svf and append the data to points "g"
     var g = d3.select("svg")
     .selectAll("g")
     .data(countries);
 
+    // Move the data points to the data that has been mapped to them
     var enter = g.enter()
         .append("g")
         .attr("id", function(d) {return d.name})
@@ -146,6 +153,7 @@ $.get("/countries", function (data){
             }
         });
     
+    // Draw the intial circles
     var circle = enter.append("circle")
         .attr("class", "circle")
         .attr("r", "20")
@@ -158,7 +166,10 @@ $.get("/countries", function (data){
         .on("mousemove", moveTooltip )
         .on("mouseleave", hideTooltip );
     
-    yearSlider.oninput = function() {
+    // On sider change update the circles
+    // This was previously oninput, but I used oninput in the HTML to update
+    // the year counter
+    yearSlider.onchange = function() {
         moveCircles();
     };
 });

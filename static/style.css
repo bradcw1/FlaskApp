@@ -1,27 +1,35 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Source+Sans+Pro:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Source+Sans+Pro&display=swap");
 body, html {
   height: 100%;
+  padding-top: 30px;
 }
 
 a.btn.btn-primary {
-  background-color: #ae9ef8;
+  background-color: #215a70;
   border: black;
 }
 
 .navbar-brand {
-  color: #ae9ef8 !important;
+  color: #215a70 !important;
   font-family: "Montserrat", sans-serif;
 }
 
 div.card, div.bg-info, div.card-body {
-  background-color: #cddffc !important;
+  background-color: #427747 !important;
   font-family: "Source Sans Pro", sans-serif;
   padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div#sliderDiv {
   margin: 10px;
 }
 
 svg {
-  background-color: #cddffc;
+  background-color: #427747;
 }
 
 #content {
@@ -37,19 +45,19 @@ svg {
 }
 
 div.tooltip {
-  background-color: #ae9ef8 !important;
+  background-color: #215a70 !important;
 }
 
 .circle {
   stroke-width: 2px;
-  fill: #ae9ef8;
+  fill: #215a70;
   fill-opacity: 0.75;
   stroke: white;
 }
 
 .circle:hover {
   stroke: black;
-  fill: #ae9ef8;
+  fill: #215a70;
   fill-opacity: 1;
 }
 

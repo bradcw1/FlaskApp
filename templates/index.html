@@ -13,14 +13,17 @@
 
 	<div id="content">    
 
-    <div id="dataviz"></div>
+    <div id="data"></div>
 
     <!-- <button id="update">Update</button>
     <input type="textbox" id="value" /> -->
     
-    <label for="yearSlider">Year: </label>
-    <input type="range" min="1800" max="2020" value="1800" class="slider" id="yearSlider" oninput="document.getElementById('yearSliderVal').innerHTML = this.value">
-    <em id="yearSliderVal"></em>
+    
+    <div id="sliderDiv">
+      <label for="yearSlider">Year: </label>
+      <input type="range" min="1800" max="2020" value="1800" class="slider" id="yearSlider" oninput="document.getElementById('yearSliderVal').innerHTML = this.value">
+      <em id="yearSliderVal">1800</em>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
